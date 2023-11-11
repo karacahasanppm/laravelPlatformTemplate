@@ -13,10 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if($role === 'superadmin')
+                    @if($user->role === 'superadmin')
                         {{ __('You are logged in superadmin panel') }} <br>
+                        {{ __($user->name) }} <br>
+                        @foreach($firms as $firm)
+                            {{$firm->name}} <br>
+                        @endforeach
                     @else
-                        {{ __('You are logged in ' . $firm['name'] . ' Your Role is ' . $role) }} <br>
+                        {{ __('You are logged in ' . $user->firm()->value('name') . ' Your Role is ' . $user->role) }} <br>
 
                     @endif
                 </div>

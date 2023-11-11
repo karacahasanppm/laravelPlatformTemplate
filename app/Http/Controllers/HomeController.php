@@ -27,13 +27,12 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->user()->role !== 'superadmin'){
-            $firm = Auth::user()->firm()->first();
-            $role = Auth::user()->role;
-            return view('home',compact('firm','role'));
+            $user = User::with('firm')->find(Auth::id());
+            return view('home',compact('user'));
         }else{
-            $firm = Firm::all();
-            $role = Auth::user()->role;
-            return view('home',compact('firm','role'));
+            $firms = Firm::all();
+            $user = User::find(Auth::id());
+            return view('home',compact('firms','user'));
         }
     }
 
