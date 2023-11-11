@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function firm()
+    {
+        return $this->hasOne(Firm::class,'id','firm_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

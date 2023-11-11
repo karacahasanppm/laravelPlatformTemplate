@@ -13,8 +13,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if($role === 'superadmin')
+                        {{ __('You are logged in superadmin panel') }} <br>
+                    @else
+                        {{ __('You are logged in ' . $firm['name'] . ' Your Role is ' . $role) }} <br>
 
-                    {{ __('You are logged in!') }}
+                    @endif
                 </div>
             </div>
         </div>

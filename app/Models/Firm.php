@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Firm extends Model
 {
     use HasFactory;
+
+    public function user(){
+        $this->hasMany(User::class);
+    }
+
 }

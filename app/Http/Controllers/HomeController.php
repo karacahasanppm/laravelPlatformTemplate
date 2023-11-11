@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Firm;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (auth()->user()->role !== 'superadmin'){
+            $firm = Auth::user()->firm()->first();
+            $role = Auth::user()->role;
+            return view('home',compact('firm','role'));
+        }else{
+            $firm = Firm::all();
+            $role = Auth::user()->role;
+            return view('home',compact('firm','role'));
+        }
     }
+
+
+
 }
