@@ -8,7 +8,7 @@
                 <div class="card-header">
                     {{ __('Dashboard') }}
                     @if($user->role === 'admin')
-                        <button type="button" class="btn btn-primary" style="float: right">Manage Firm</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('adminPage') }}'" style="float: right">Manage Firm</button>
                     @endif
                 </div>
 

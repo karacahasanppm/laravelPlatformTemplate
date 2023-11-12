@@ -8,5 +8,7 @@ use Illuminate\Http\Request;
 
 class FirmController extends Controller
 {
-
+    public function adminPage(){
+        return view('manage-firm.admin');
+    }
 }
