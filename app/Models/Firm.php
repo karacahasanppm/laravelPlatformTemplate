@@ -9,12 +9,12 @@ class Firm extends Model
 {
     use HasFactory;
 
-    public function user(){
-        $this->hasMany(User::class);
+    public function users(){
+        return $this->hasMany(User::class);
     }
 
-    public function recipient(){
-         $this->hasMany(Recipient::class);
+    public function recipients(){
+         return $this->hasMany(Recipient::class,'firm_id');
     }
 
 }
