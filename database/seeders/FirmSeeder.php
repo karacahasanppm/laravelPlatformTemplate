@@ -13,13 +13,12 @@ class FirmSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('firms')->insert([
-           [
-               'name' => 'Firma1'
-           ],
-           [
-               'name' => 'Firma2'
-           ]
-        ]);
+        for ($i = 1; $i <= 50; $i++) {
+            DB::table('firms')->insert(
+                [
+                    'name' => fake()->streetName()
+                ]
+            );
+        }
     }
 }

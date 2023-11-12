@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Recipient extends Model
 {
     use HasFactory;
+
+    public function firm(){
+        $this->belongsTo(Firm::class);
+    }
 }

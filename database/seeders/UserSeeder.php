@@ -53,5 +53,28 @@ class UserSeeder extends Seeder
                 ]
             ]
         );
+
+        for ($i = 3; $i <= 50; $i++) {
+            DB::table('users')->insert(
+                [
+                    'name' => fake()->name(),
+                    'email' => fake()->unique()->safeEmail(),
+                    'password' => Hash::make('password'),
+                    'role' => 'admin',
+                    'firm_id' => $i
+                ]
+            );
+        }
+        for ($i = 3; $i <= 50; $i++) {
+            DB::table('users')->insert(
+                [
+                    'name' => fake()->name(),
+                    'email' => fake()->unique()->safeEmail(),
+                    'password' => Hash::make('password'),
+                    'role' => 'user',
+                    'firm_id' => $i
+                ]
+            );
+        }
     }
 }

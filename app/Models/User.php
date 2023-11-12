@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     public function firm()
     {
-        return $this->hasOne(Firm::class,'id','firm_id');
+        return $this->belongsTo(Firm::class,'id','firm_id');
     }
 
     /**

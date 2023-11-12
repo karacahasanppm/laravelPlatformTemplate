@@ -13,4 +13,8 @@ class Firm extends Model
         $this->hasMany(User::class);
     }
 
+    public function recipient(){
+         $this->hasMany(Recipient::class);
+    }
+
 }
