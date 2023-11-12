@@ -20,7 +20,33 @@
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">users</div>
+                            <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email Address</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Operation</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($users as $user)
+                                        <tr>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->role}}</td>
+                                            <td>Düzenle</td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="4"><button type="button" class="btn btn-primary" style="width: 100%">Add User</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
                             <div class="tab-pane fade" id="recipients" role="tabpanel" aria-labelledby="recipients-tab">recipients</div>
                         </div>
                     </div>
