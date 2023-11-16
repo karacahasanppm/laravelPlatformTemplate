@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FirmController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\AdminOrMember;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,4 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/manage-firm/admin',[FirmController::class, 'adminPage'])->middleware(Admin::class)->name('adminPage');
+Route::get('/user/detail/{id}',[UserController::class,'detailPage'])->middleware(AdminOrMember::class)->name('userDetailPage');

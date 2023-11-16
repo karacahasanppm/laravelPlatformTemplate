@@ -18,7 +18,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if($user->role === 'superadmin')
+                    @if($user->role === 'superuser')
                         {{ __('You are logged in superadmin panel') }} <br>
                         {{ __($user->name) }} <br>
                         @foreach($firms as $firm)

@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                     'name' => 'Hasan',
                     'email' => 'karacahasanppm@gmail.com',
                     'password' => Hash::make('password'),
-                    'role' => 'superadmin',
+                    'role' => 'superuser',
                     'firm_id' => 0
                 ],
                 [
