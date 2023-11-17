@@ -18,7 +18,6 @@ class AdminOrMember
      */
     public function handle(Request $request, Closure $next): Response
     {
-
         if(Auth::check()){
             $role = Auth::user()->role;
             if ($role !== 'superuser'){
@@ -31,7 +30,7 @@ class AdminOrMember
                         }
                     }
                 }else{
-                    if (Auth::user()->firm_id != User::find($request->id)->firm_id){
+                    if (Auth::user()->firm_id != User::find($request->user_id)->firm_id){
                         abort(403,'You are not authorized to view this page.');
                     }
                 }

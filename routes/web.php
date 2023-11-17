@@ -29,4 +29,5 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/manage-firm/admin',[FirmController::class, 'adminPage'])->middleware(Admin::class)->name('adminPage');
-Route::get('/user/detail/{id}',[UserController::class,'detailPage'])->middleware(AdminOrMember::class)->name('userDetailPage');
+Route::get('/user/detail/{user_id}',[UserController::class,'detailPage'])->middleware(AdminOrMember::class)->name('userDetailPage');
+Route::post('/user/update',[UserController::class,'updateUser'])->middleware(AdminOrMember::class)->name('updateUser');
