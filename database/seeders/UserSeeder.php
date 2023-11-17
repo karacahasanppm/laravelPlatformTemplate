@@ -18,39 +18,53 @@ class UserSeeder extends Seeder
             [
                 [
                     'name' => 'Hasan',
-                    'email' => 'karacahasanppm@gmail.com',
+                    'email' => 'superuser@gmail.com',
                     'password' => Hash::make('password'),
                     'role' => 'superuser',
                     'firm_id' => 0
                 ],
                 [
                     'name' => 'Hasan Firm 1 Admin',
-                    'email' => 'karacahasanppm2@gmail.com',
+                    'email' => 'firm1admin@gmail.com',
                     'password' => Hash::make('password'),
                     'role' => 'admin',
                     'firm_id' => 1
                 ],
                 [
                     'name' => 'Hasan Firm 1 User',
-                    'email' => 'karacahasanppm3@gmail.com',
+                    'email' => 'firm1user@gmail.com',
                     'password' => Hash::make('password'),
                     'role' => 'user',
                     'firm_id' => 1
                 ],
                 [
+                    'name' => 'Hasan Firm 1 Api',
+                    'email' => 'firm1api@gmail.com',
+                    'password' => Hash::make('password'),
+                    'role' => 'api',
+                    'firm_id' => 1
+                ],
+                [
                     'name' => 'Hasan Firm 2 Admin',
-                    'email' => 'karacahasanppm4@gmail.com',
+                    'email' => 'firm2admin@gmail.com',
                     'password' => Hash::make('password'),
                     'role' => 'admin',
                     'firm_id' => 2
                 ],
                 [
                     'name' => 'Hasan Firm 2 User',
-                    'email' => 'karacahasanppm5@gmail.com',
+                    'email' => 'firm2user@gmail.com',
                     'password' => Hash::make('password'),
                     'role' => 'user',
                     'firm_id' => 2
-                ]
+                ],
+                [
+                    'name' => 'Hasan Firm 2 Api',
+                    'email' => 'firm2api@gmail.com',
+                    'password' => Hash::make('password'),
+                    'role' => 'api',
+                    'firm_id' => 2
+                ],
             ]
         );
 
@@ -72,6 +86,17 @@ class UserSeeder extends Seeder
                     'email' => fake()->unique()->safeEmail(),
                     'password' => Hash::make('password'),
                     'role' => 'user',
+                    'firm_id' => $i
+                ]
+            );
+        }
+        for ($i = 3; $i <= 50; $i++) {
+            DB::table('users')->insert(
+                [
+                    'name' => fake()->name(),
+                    'email' => fake()->unique()->safeEmail(),
+                    'password' => Hash::make('password'),
+                    'role' => 'api',
                     'firm_id' => $i
                 ]
             );

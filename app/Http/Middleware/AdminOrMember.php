@@ -19,16 +19,25 @@ class AdminOrMember
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(Auth::user()->role !== 'superuser'){
-            if(Auth::user()->role !== 'admin' ){
-                if(Auth::id() != $request->id){
-                    abort(403,'You are not authorized to view this page.');
-                }
-            }else{
-                if (Auth::user()->firm_id != User::find($request->id)->firm_id){
-                    abort(403,'You are not authorized to view this page.');
+        if(Auth::check()){
+            $role = Auth::user()->role;
+            if ($role !== 'superuser'){
+                if ($role !== 'admin'){
+                    if($role !== 'user'){
+                        abort(403,'You are not authorized to view this page.');
+                    }else{
+                        if(Auth::id() != $request->id){
+                            abort(403,'You are not authorized to view this page.');
+                        }
+                    }
+                }else{
+                    if (Auth::user()->firm_id != User::find($request->id)->firm_id){
+                        abort(403,'You are not authorized to view this page.');
+                    }
                 }
             }
+        }else{
+            return redirect()->route('login');
         }
 
         return $next($request);

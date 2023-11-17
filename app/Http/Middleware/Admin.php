@@ -16,9 +16,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if(Auth::user()->role !== 'admin'){
-            abort(403,'You are not authorized to view this page.');
+        if (!Auth::check()){
+            return redirect()->route('login');
+        }else{
+            if(Auth::user()->role !== 'admin'){
+                abort(403,'You are not authorized to view this page.');
+            }
         }
 
         return $next($request);
