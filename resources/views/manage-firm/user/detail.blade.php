@@ -38,7 +38,7 @@
                                     <label class="col-4 col-form-label">Role</label>
                                     <div class="col-8">
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text">{{$user->role}}</span>
+                                            <span class="input-group-text">{{$user->roles[0]['name']}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -46,10 +46,11 @@
                                     <label for="role_select" class="col-4 col-form-label">New Role</label>
                                     <div class="col-8">
                                         <select id="role_select" name="role_select" class="form-select">
-                                            @if(Auth()->user()->role === 'admin' || Auth()->user()->role === 'superuser')
-                                                <option disabled selected value="{{$user->role}}">{{$user->role}}</option>
-                                                <option value="admin">admin</option>
-                                                <option value="user">user</option>
+                                            @if(Auth()->user()->hasRole(['Admin','SuperUser']))
+                                                <option disabled selected value="{{$user->roles[0]['name']}}">{{$user->roles[0]['name']}}</option>
+                                                @foreach($roles as $role)
+                                                    <option value="{{$role->name}}">{{$role->name}}</option>
+                                                @endforeach
                                             @endif
                                         </select>
                                     </div>

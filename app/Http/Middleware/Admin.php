@@ -19,7 +19,7 @@ class Admin
         if (!Auth::check()){
             return redirect()->route('login');
         }else{
-            if(Auth::user()->role !== 'admin'){
+            if(!Auth::user()->hasRole('Admin')){
                 abort(403,'You are not authorized to view this page.');
             }
         }

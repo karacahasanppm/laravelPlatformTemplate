@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class FirmController extends Controller
 {
     public function adminPage(){
-        $users = Firm::find(Auth::user()->firm_id)->users()->whereIn('role',['admin','user'])->get();
+        $users = User::query()
+            ->where('firm_id','=',Auth::user()->firm_id)
+            ->whereHas("roles",function ($q){
+                $q->whereIn("name", ["Admin","User",'Viewer']);
+            })->get();
         return view('manage-firm.admin',compact('users'));
     }
 }

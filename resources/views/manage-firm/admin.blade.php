@@ -36,7 +36,7 @@
                                         <tr>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td>{{$user->role}}</td>
+                                            <td>{{$user->roles[0]['name']}}</td>
                                             <td>
                                                 <a target="_blank" href='{{ route('userDetailPage',[$user->id]) }}' type="button" class="btn btn-primary" style="float: right">Update</a>
                                             </td>
