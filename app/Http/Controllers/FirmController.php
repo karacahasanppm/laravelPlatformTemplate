@@ -13,7 +13,7 @@ class FirmController extends Controller
         $users = User::query()
             ->where('firm_id','=',Auth::user()->firm_id)
             ->whereHas("roles",function ($q){
-                $q->whereIn("name", ["Admin","User",'Viewer']);
+                $q->whereIn("name", ["Admin","User",'Viewer','Api']);
             })->get();
         return view('manage-firm.admin',compact('users'));
     }

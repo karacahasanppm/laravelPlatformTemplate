@@ -18899,6 +18899,7 @@
             public mixed $role_select;
             public mixed $name_input;
             public mixed $email_input;
+            public mixed $password;
             /**
          *
          *

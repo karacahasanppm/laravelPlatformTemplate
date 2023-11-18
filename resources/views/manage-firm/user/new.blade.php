@@ -11,16 +11,14 @@
                     </div>
 
                     <div class="card-body">
-
-                        <form method="post" action="{{route('updateUser')}}">
+                        <form method="post" action="{{route('createUser')}}">
                             @csrf
-                            <input id="user_id" name="user_id" hidden value="{{$user->id}}">
                             <div class="form-group row">
                                 <label for="name-input" class="col-4 col-form-label">Name</label>
                                 <div class="col-8">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa fa-address-card"></i></span>
-                                        <input id="name_input" name="name_input" type="text" required="required" class="form-control" value="{{$user->name}}">
+                                        <input id="name_input" name="name_input" type="text" required="required" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
@@ -29,31 +27,40 @@
                                 <div class="col-8">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa fa-at"></i></span>
-                                        <input id="email_input" name="email_input" type="text" required="required" class="form-control" value="{{$user->email}}">
+                                        <input id="email_input" name="email_input" type="text" required="required" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
-                            @if(Auth()->user()->hasRole(['Admin','SuperUser']))
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label">Role</label>
-                                    <div class="col-8">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">{{$user->roles[0]['name']}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="role_select" class="col-4 col-form-label">New Role</label>
-                                    <div class="col-8">
-                                        <select id="role_select" name="role_select" class="form-select">
-                                            <option disabled selected value="{{$user->roles[0]['name']}}">{{$user->roles[0]['name']}}</option>
+                            <div class="form-group row mb-3">
+                                <label for="role_select" class="col-4 col-form-label">New Role</label>
+                                <div class="col-8">
+                                    <select id="role_select" name="role_select" class="form-select">
+                                        @if(Auth()->user()->hasRole(['Admin','SuperUser']))
                                             @foreach($roles as $role)
                                                 <option value="{{$role->name}}">{{$role->name}}</option>
                                             @endforeach
-                                        </select>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password_input" class="col-4 col-form-label">Password</label>
+                                <div class="col-8">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                        <input id="password" name="password" type="password" required="required" class="form-control" value="">
                                     </div>
                                 </div>
-                            @endif
+                            </div>
+                            <div class="form-group row">
+                                <label for="password_confirm_input" class="col-4 col-form-label">Confirm Password</label>
+                                <div class="col-8">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                        <input id="password_confirmation" name="password_confirmation" type="password" required="required" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row mb-3">
                                 <div class="offset-4 col-8">
                                     <button name="submit" type="submit" class="btn btn-primary">Save</button>

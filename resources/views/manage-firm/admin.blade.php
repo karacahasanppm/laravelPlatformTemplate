@@ -43,7 +43,7 @@
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="4"><button type="button" class="btn btn-primary" style="width: 100%">Add User</button></td>
+                                        <td colspan="4"><a target="_blank" href="{{route('createUserPage')}}" type="button" class="btn btn-primary" style="width: 100%">Add User</a></td>
                                     </tr>
                                     </tbody>
                                 </table>

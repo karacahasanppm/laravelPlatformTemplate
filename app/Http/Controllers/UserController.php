@@ -6,9 +6,12 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
+use const http\Client\Curl\AUTH_ANY;
 
 class UserController extends Controller
 {
@@ -37,6 +40,35 @@ class UserController extends Controller
             $user->syncRoles($request->role_select);
         }
 
+        return Redirect::back()->with(['success' => 'Successfully saved']);
+    }
+
+    public function createUserPage(){
+        $roles = Role::query()->where('name','!=','SuperUser')->get();
+        return view('manage-firm/user.new',compact('roles'));
+    }
+
+    public function createUser(Request $request){
+
+        $firmId = Auth::user()->firm_id;
+
+        $request->validate([
+            'email_input' => 'required|email|unique:users,email,'.$request->user_id,
+            'name_input' => 'required|string|min:3|max:30',
+            'role_select' => 'required|'.Rule::in('Admin','User','Viewer','Api'),
+            'password' => 'required|string|min:8|max:30|confirmed',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name_input;
+        $user->email = $request->email_input;
+        $user->firm_id = $firmId;
+        $user->password = Hash::make($request->password);
+        $user->syncRoles($request->role_select);
+        $user->save();
+        if ($request->role_select === 'Api'){
+            $user->createToken('api-token')->plainTextToken;
+        }
         return Redirect::back()->with(['success' => 'Successfully saved']);
     }
 }
