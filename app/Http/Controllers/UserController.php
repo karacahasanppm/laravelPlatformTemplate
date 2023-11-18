@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use const http\Client\Curl\AUTH_ANY;
@@ -24,17 +25,32 @@ class UserController extends Controller
 
     public function updateUser(Request $request){
 
-        $request->validate([
-            'user_id' => 'required|integer',
-            'email_input' => 'required|unique:users,email,'.$request->user_id,
-            'name_input' => 'required',
-            'role_select' => Rule::in('Admin','User','Viewer')
-        ]);
+         $rules = [
+             'user_id' => 'required|integer',
+             'email_input' => 'required|unique:users,email,'.$request->user_id,
+             'name_input' => 'required',
+             'role_select' => Rule::in('Admin','User','Viewer'),
+             'password' => 'string|min:8|max:30|confirmed',
+         ];
+
+        $request->validate($rules);
 
         $user = User::find($request->user_id);
 
+        if (!Auth::user()->hasRole(['Admin','SuperUser'])){
+            if(!$request->has('password_old')){
+                return redirect()->back()->with(['error' => 'Current Password field is required.']);
+            }
+            if (!Hash::check($request->password_old,$user->password)){
+                return redirect()->back()->with(['error' => 'Current Password does not match.']);
+            }
+        }
+
         $user->email = $request->email_input;
         $user->name = $request->name_input;
+        if ($request->has('password')){
+            $user->password = Hash::make($request->password);
+        }
         $user->save();
         if ($request->has('role_select')){
             $user->syncRoles($request->role_select);

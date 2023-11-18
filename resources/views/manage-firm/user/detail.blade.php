@@ -54,6 +54,32 @@
                                     </div>
                                 </div>
                             @endif
+                            @if(Auth()->user()->hasRole(['User','Viewer']))
+                                <div class="form-group row">
+                                    <label for="password_old" class="col-4 col-form-label">Current Password</label>
+                                    <div class="col-8">
+                                        <div class="input-group mb-3">
+                                            <input id="password_old" name="password_old" type="password" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="form-group row">
+                                <label for="password_input" class="col-4 col-form-label">Password</label>
+                                <div class="col-8">
+                                    <div class="input-group mb-3">
+                                        <input id="password" name="password" type="password" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password_confirm_input" class="col-4 col-form-label">Confirm Password</label>
+                                <div class="col-8">
+                                    <div class="input-group mb-3">
+                                        <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row mb-3">
                                 <div class="offset-4 col-8">
                                     <button name="submit" type="submit" class="btn btn-primary">Save</button>
@@ -71,6 +97,11 @@
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
+                                </div>
+                            @endif
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
                                 </div>
                             @endif
                         </form>

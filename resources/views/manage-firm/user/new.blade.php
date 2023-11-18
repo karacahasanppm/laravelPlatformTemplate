@@ -47,7 +47,6 @@
                                 <label for="password_input" class="col-4 col-form-label">Password</label>
                                 <div class="col-8">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text"><i class="fa fa-at"></i></span>
                                         <input id="password" name="password" type="password" required="required" class="form-control" value="">
                                     </div>
                                 </div>
@@ -56,7 +55,6 @@
                                 <label for="password_confirm_input" class="col-4 col-form-label">Confirm Password</label>
                                 <div class="col-8">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text"><i class="fa fa-at"></i></span>
                                         <input id="password_confirmation" name="password_confirmation" type="password" required="required" class="form-control" value="">
                                     </div>
                                 </div>

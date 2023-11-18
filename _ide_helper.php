@@ -18900,6 +18900,7 @@
             public mixed $name_input;
             public mixed $email_input;
             public mixed $password;
+            public mixed $password_old;
             /**
          *
          *
