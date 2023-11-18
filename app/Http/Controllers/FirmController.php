@@ -15,6 +15,7 @@ class FirmController extends Controller
             ->whereHas("roles",function ($q){
                 $q->whereIn("name", ["Admin","User",'Viewer','Api']);
             })->get();
-        return view('manage-firm.admin',compact('users'));
+        $recipients = Firm::find(Auth::user()->firm_id)->recipients()->paginate(15);
+        return view('manage-firm.admin',compact('users','recipients'));
     }
 }

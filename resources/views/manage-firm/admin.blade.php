@@ -9,7 +9,6 @@
                     <div class="card-header">
                         {{ __('Management') }}
                     </div>
-
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -53,12 +52,45 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="tab-pane fade" id="recipients" role="tabpanel" aria-labelledby="recipients-tab">recipients</div>
+                            <div class="tab-pane fade" id="recipients" role="tabpanel" aria-labelledby="recipients-tab">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th scope="col">Recipient Type</th>
+                                        <th scope="col">Recipient</th>
+                                        <th scope="col">Allow Status</th>
+                                        <th scope="col">Consent Date</th>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($recipients as $recipient)
+                                        <tr>
+                                            <td>{{$recipient->recipient_type}}</td>
+                                            <td>{{$recipient->recipient}}</td>
+                                            <td>{{$recipient->allow_status}}</td>
+                                            <td>{{$recipient->consent_date}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                {{ $recipients->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            if({{!is_null(app('request')->input('page'))}}) {
+                document.getElementById('users-tab').setAttribute('class','nav-link');
+                document.getElementById('users-tab').setAttribute('aria-selected','false');
+                document.getElementById('recipients-tab').setAttribute('class','nav-link active');
+                document.getElementById('recipients-tab').setAttribute('aria-selected','true');
+                document.getElementById('users').setAttribute('class','tab-pane fade');
+                document.getElementById('recipients').setAttribute('class','tab-pane fade show active');
+            }
+        });
+    </script>
 
 @endsection
