@@ -20,7 +20,7 @@ use App\Http\Middleware\AdminOrMember;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes();

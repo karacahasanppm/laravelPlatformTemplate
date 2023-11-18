@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
-use const http\Client\Curl\AUTH_ANY;
 
 class UserController extends Controller
 {
