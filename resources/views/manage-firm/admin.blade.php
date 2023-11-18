@@ -38,7 +38,7 @@
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->roles[0]['name']}}</td>
                                             <td>
-                                                <a target="_blank" href='{{ route('userDetailPage',[$user->id]) }}' type="button" class="btn btn-primary" style="float: right">Update</a>
+                                                <a target="_blank" href='{{ route('userDetailPage',[$user->id]) }}' type="button" class="btn btn-primary">Manage</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -47,7 +47,11 @@
                                     </tr>
                                     </tbody>
                                 </table>
-
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="tab-pane fade" id="recipients" role="tabpanel" aria-labelledby="recipients-tab">recipients</div>
                         </div>

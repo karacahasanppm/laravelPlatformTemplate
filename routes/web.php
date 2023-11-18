@@ -33,3 +33,4 @@ Route::get('/user/new',[UserController::class, 'createUserPage'])->middleware(Ad
 Route::get('/user/detail/{user_id}',[UserController::class,'detailPage'])->middleware(AdminOrMember::class)->name('userDetailPage');
 Route::post('/user/update',[UserController::class,'updateUser'])->middleware(AdminOrMember::class)->name('updateUser');
 Route::post('/user/create',[UserController::class,'createUser'])->middleware(Admin::class)->name('createUser');
+Route::get('/user/delete/{user_id}',[UserController::class,'deleteUser'])->middleware(Admin::class)->name('deleteUser');

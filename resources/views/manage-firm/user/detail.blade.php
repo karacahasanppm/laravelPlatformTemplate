@@ -83,6 +83,9 @@
                             <div class="form-group row mb-3">
                                 <div class="offset-4 col-8">
                                     <button name="submit" type="submit" class="btn btn-primary">Save</button>
+                                    @if(Auth::user()->hasRole(['Admin','SuperUser']))
+                                        <a href="{{route('deleteUser',[$user->id])}}" name="submit" type="submit" class="btn btn-danger" style="float: right">Delete</a>
+                                    @endif
                                 </div>
                             </div>
                             @if (count($errors) > 0)
