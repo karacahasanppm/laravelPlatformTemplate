@@ -18,7 +18,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            if (!in_array($user->role, ['superuser', 'admin', 'user'])) {
+            if (!Auth::user()->hasRole(['Admin','SuperUser','User','Viewer'])) {
                 Auth::logout();
                 return redirect('/login')->with('error', 'You are not authorized to log in.');
             }
