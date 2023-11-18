@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,59 +15,76 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert(
-            [
-                [
-                    'name' => 'Hasan',
-                    'email' => 'superuser@gmail.com',
-                    'password' => Hash::make('password'),
-                    'role' => 'superuser',
-                    'firm_id' => 0
-                ],
-                [
-                    'name' => 'Hasan Firm 1 Admin',
-                    'email' => 'firm1admin@gmail.com',
-                    'password' => Hash::make('password'),
-                    'role' => 'admin',
-                    'firm_id' => 1
-                ],
-                [
-                    'name' => 'Hasan Firm 1 User',
-                    'email' => 'firm1user@gmail.com',
-                    'password' => Hash::make('password'),
-                    'role' => 'user',
-                    'firm_id' => 1
-                ],
-                [
-                    'name' => 'Hasan Firm 1 Api',
-                    'email' => 'firm1api@gmail.com',
-                    'password' => Hash::make('password'),
-                    'role' => 'api',
-                    'firm_id' => 1
-                ],
-                [
-                    'name' => 'Hasan Firm 2 Admin',
-                    'email' => 'firm2admin@gmail.com',
-                    'password' => Hash::make('password'),
-                    'role' => 'admin',
-                    'firm_id' => 2
-                ],
-                [
-                    'name' => 'Hasan Firm 2 User',
-                    'email' => 'firm2user@gmail.com',
-                    'password' => Hash::make('password'),
-                    'role' => 'user',
-                    'firm_id' => 2
-                ],
-                [
-                    'name' => 'Hasan Firm 2 Api',
-                    'email' => 'firm2api@gmail.com',
-                    'password' => Hash::make('password'),
-                    'role' => 'api',
-                    'firm_id' => 2
-                ],
-            ]
-        );
+
+        $user = User::create([
+            'name' => 'Hasan',
+            'email' => 'superuser@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'superuser',
+            'firm_id' => 0
+        ]);
+
+        $user->assignRole(['SuperUser']);
+
+        $user = User::create([
+            'name' => 'Hasan firm 1 admin',
+            'email' => 'firm1admin@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
+            'firm_id' => 1
+        ]);
+
+        $user->assignRole(['Admin']);
+
+        $user = User::create([
+            'name' => 'Hasan firm1 user',
+            'email' => 'firm1user@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'firm_id' => 1
+        ]);
+
+        $user->assignRole(['User']);
+
+        $user = User::create([
+            'name' => 'Hasan firm1 viewer',
+            'email' => 'firm1viewer@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'viewer',
+            'firm_id' => 1
+        ]);
+
+        $user->assignRole(['Viewer']);
+
+        $user = User::create([
+            'name' => 'Hasan firm 2 admin',
+            'email' => 'firm2admin@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
+            'firm_id' => 2
+        ]);
+
+        $user->assignRole(['Admin']);
+
+        $user = User::create([
+            'name' => 'Hasan firm2 user',
+            'email' => 'firm2user@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'firm_id' => 2
+        ]);
+
+        $user->assignRole(['User']);
+
+        $user = User::create([
+            'name' => 'Hasan firm2 viewer',
+            'email' => 'firm2viewer@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'viewer',
+            'firm_id' => 2
+        ]);
+
+        $user->assignRole(['Viewer']);
 
         for ($i = 3; $i <= 50; $i++) {
             DB::table('users')->insert(
