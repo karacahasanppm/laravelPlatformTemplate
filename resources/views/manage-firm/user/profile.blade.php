@@ -33,29 +33,16 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(Auth()->user()->hasRole(['Admin','SuperUser']))
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label">Role</label>
-                                    <div class="col-8">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">{{$user->roles[0]['name']}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="role_select" class="col-4 col-form-label">New Role</label>
-                                    <div class="col-8">
-                                        <select id="role_select" name="role_select" class="form-select">
-                                            <option disabled selected value="{{$user->roles[0]['name']}}">{{$user->roles[0]['name']}}</option>
-                                            @foreach($roles as $role)
-                                                <option value="{{$role->name}}">{{$role->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            @endif
                             <div class="form-group row">
-                                <label for="password_input" class="col-4 col-form-label">New Password</label>
+                                <label for="password_old" class="col-4 col-form-label">Current Password</label>
+                                <div class="col-8">
+                                    <div class="input-group mb-3">
+                                        <input id="password_old" name="password_old" type="password" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password_input" class="col-4 col-form-label">Password</label>
                                 <div class="col-8">
                                     <div class="input-group mb-3">
                                         <input id="password" name="password" type="password" class="form-control" value="">
@@ -63,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="password_confirm_input" class="col-4 col-form-label">Confirm New Password</label>
+                                <label for="password_confirm_input" class="col-4 col-form-label">Confirm Password</label>
                                 <div class="col-8">
                                     <div class="input-group mb-3">
                                         <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" value="">
@@ -73,9 +60,6 @@
                             <div class="form-group row mb-3">
                                 <div class="offset-4 col-8">
                                     <button name="submit" type="submit" class="btn btn-primary">Save</button>
-                                    @if(Auth::user()->hasRole(['Admin','SuperUser']))
-                                        <a href="{{route('deleteUser',[$user->firm_id,$user->id])}}" name="submit" type="submit" class="btn btn-danger" style="float: right">Delete</a>
-                                    @endif
                                 </div>
                             </div>
                             @if (count($errors) > 0)

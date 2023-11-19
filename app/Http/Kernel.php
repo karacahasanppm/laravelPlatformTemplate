@@ -2,6 +2,11 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckFirmOwnership;
+use App\Http\Middleware\ManageFirm;
+use App\Http\Middleware\manageRecipient;
+use App\Http\Middleware\ManageUser;
+use App\Http\Middleware\viewRecipient;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -54,7 +59,11 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'admin' => \App\Http\Middleware\Admin::class,
+        'manage-user' => ManageUser::class,
+        'manage-recipient' => ManageRecipient::class,
+        'manage-firm' => ManageFirm::class,
+        'view-recipient' => ViewRecipient::class,
+        'check-membership' => CheckFirmOwnership::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

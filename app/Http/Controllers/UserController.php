@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Firm;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,14 +10,22 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
+use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
-    public function detailPage ($id){
-
-        $user = User::find($id);
+    public function detailPage ($firmId,$userId){
+        $user = User::where('firm_id','=',$firmId)->find($userId);
+        if (is_null($user)){
+            return redirect()->back()->with(['error' => 'User Not Found.']);
+        }
         $roles = Role::all();
         return view('manage-firm/user.detail',compact('user','roles'));
+    }
+
+    public function profilePage($firmId,$userId){
+        $user = Auth::user();
+        return view('manage-firm/user.profile',compact('user'));
     }
 
     public function updateUser(Request $request){
@@ -26,7 +35,7 @@ class UserController extends Controller
              'email_input' => 'required|unique:users,email,'.$request->user_id,
              'name_input' => 'required',
              'role_select' => Rule::in('Admin','User','Viewer'),
-             'password' => 'string|min:8|max:30|confirmed',
+             'password' => 'nullable|string|min:8|max:30|confirmed',
          ];
 
         $request->validate($rules);
@@ -84,13 +93,13 @@ class UserController extends Controller
         return Redirect::back()->with(['success' => 'Successfully saved']);
     }
 
-    public function deleteUser ($id){
+    public function deleteUser ($firmId,$id){
 
         $user = User::findOrFail($id);
 
         $user->delete();
 
-        return Redirect::route('adminPage')->with(['success' => 'Successfully deleted user '.$id]);
+        return Redirect::route('adminPage',$firmId)->with(['success' => 'Successfully deleted user '.$id]);
 
     }
 }

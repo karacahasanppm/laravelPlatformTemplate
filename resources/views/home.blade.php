@@ -8,9 +8,10 @@
                 <div class="card-header">
                     {{ __('Dashboard') }}
                     @if($user->hasRole('Admin'))
-                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('adminPage') }}'" style="float: right">Manage Firm</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('adminPage',[$user->firm_id]) }}'" style="float: right">Manage Firm</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('profileDetailPage',[$user->firm_id,$user->id]) }}'" style="float: right">Profile</button>
                     @else
-                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('userDetailPage',[Auth::id()]) }}'" style="float: right">Manage Account</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('profileDetailPage',[$user->firm_id,$user->id]) }}'" style="float: right">Profile</button>
                     @endif
                 </div>
 
@@ -20,7 +21,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if($user->role === 'superuser')
+                    @if($user->hasRole('SuperUser'))
                         {{ __('You are logged in superadmin panel') }} <br>
                         {{ __($user->name) }} <br>
                         @foreach($firms as $firm)
@@ -28,7 +29,6 @@
                         @endforeach
                     @else
                         {{ __('Welcome to ' . $user->firm()->value('name')) }} <br>
-                        {{ __('Your role is ' . $user->role) }} <br>
 
                             <table class="table">
                                 <thead>

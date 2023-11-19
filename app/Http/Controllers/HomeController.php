@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role !== 'superadmin'){
+        if (!Auth::user()->hasRole('SuperUser')){
             $user = User::with(['firm'])->find(Auth::id());
             $recipients = Firm::find($user->firm->id)->recipients()->paginate(15);
             return view('home',compact('user','recipients'));

@@ -18901,6 +18901,8 @@
             public mixed $email_input;
             public mixed $password;
             public mixed $password_old;
+            public mixed $firm_id;
+
             /**
          *
          *

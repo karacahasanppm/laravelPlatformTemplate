@@ -20,14 +20,13 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
-
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email Address</th>
                                         <th scope="col">Role</th>
-                                        <th scope="col">Operation</th>
+                                        <th scope="col">Operate</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -37,12 +36,12 @@
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->roles[0]['name']}}</td>
                                             <td>
-                                                <a target="_blank" href='{{ route('userDetailPage',[$user->id]) }}' type="button" class="btn btn-primary">Manage</a>
+                                                <a target="_blank" href='{{ route('userDetailPage',[$user->firm_id,$user->id]) }}' type="button" class="btn btn-primary">Manage</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="4"><a target="_blank" href="{{route('createUserPage')}}" type="button" class="btn btn-primary" style="width: 100%">Add User</a></td>
+                                        <td colspan="4"><a target="_blank" href="{{route('createUserPage',[$user->firm_id])}}" type="button" class="btn btn-primary" style="width: 100%">Add User</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -53,12 +52,23 @@
                                 @endif
                             </div>
                             <div class="tab-pane fade" id="recipients" role="tabpanel" aria-labelledby="recipients-tab">
+                                <form action="{{ route('adminPage',[Auth::user()->firm_id]) }}" method="get" style="margin-top: 10px">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control mb-3" placeholder="Recipient or Recipient Type" name="q" value="{{app('request')->input('q')}}">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="submit" class="form-control mb-3" value="Search">
+                                        </div>
+                                    </div>
+                                </form>
                                 <table class="table table-striped">
                                     <thead>
                                         <th scope="col">Recipient Type</th>
                                         <th scope="col">Recipient</th>
                                         <th scope="col">Allow Status</th>
                                         <th scope="col">Consent Date</th>
+                                        <th scope="col">Operate</th>
                                     </thead>
                                     <tbody>
                                     @foreach($recipients as $recipient)
@@ -67,11 +77,14 @@
                                             <td>{{$recipient->recipient}}</td>
                                             <td>{{$recipient->allow_status}}</td>
                                             <td>{{$recipient->consent_date}}</td>
+                                            <td>
+                                                <a target="_blank" href='{{ route('recipientDetailPage',[$recipient->firm_id,$recipient->id]) }}' type="button" class="btn btn-primary">Manage</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{ $recipients->links() }}
+                                {{ $recipients->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -82,7 +95,7 @@
 
     <script>
         $(document).ready(function () {
-            if({{!is_null(app('request')->input('page'))}}) {
+            if({{!is_null(app('request')->input('q')) || !is_null(app('request')->input('page'))}}) {
                 document.getElementById('users-tab').setAttribute('class','nav-link');
                 document.getElementById('users-tab').setAttribute('aria-selected','false');
                 document.getElementById('recipients-tab').setAttribute('class','nav-link active');

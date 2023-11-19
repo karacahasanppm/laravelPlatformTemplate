@@ -28,9 +28,11 @@ Auth::routes();
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/manage-firm/admin',[FirmController::class, 'adminPage'])->middleware(Admin::class)->name('adminPage');
-Route::get('/user/new',[UserController::class, 'createUserPage'])->middleware(Admin::class)->name('createUserPage');
-Route::get('/user/detail/{user_id}',[UserController::class,'detailPage'])->middleware(AdminOrMember::class)->name('userDetailPage');
-Route::post('/user/update',[UserController::class,'updateUser'])->middleware(AdminOrMember::class)->name('updateUser');
-Route::post('/user/create',[UserController::class,'createUser'])->middleware(Admin::class)->name('createUser');
-Route::get('/user/delete/{user_id}',[UserController::class,'deleteUser'])->middleware(Admin::class)->name('deleteUser');
+Route::get('/{firm_id}/manage-firm/admin',[FirmController::class, 'adminPage'])->middleware('manage-user')->name('adminPage');
+Route::get('/{firm_id}/user/new',[UserController::class, 'createUserPage'])->middleware('manage-user','check-membership')->name('createUserPage');
+Route::get('/{firm_id}/user/detail/{user_id}',[UserController::class,'detailPage'])->middleware('manage-user','check-membership')->name('userDetailPage');
+Route::get('/{firm_id}/profile/detail/{user_id}',[UserController::class,'profilePage'])->middleware('manage-user','check-membership')->name('profileDetailPage');
+Route::get('/{firm_id}/recipient/detail/{recipient_id}',[UserController::class,'detailPage'])->middleware('manage-recipient','check-membership')->name('recipientDetailPage');
+Route::post('/{firm_id}/user/update',[UserController::class,'updateUser'])->middleware('manage-user','check-membership')->name('updateUser');
+Route::post('/{firm_id}/user/create',[UserController::class,'createUser'])->middleware('manage-user','check-membership')->name('createUser');
+Route::get('/{firm_id}/user/delete/{user_id}',[UserController::class,'deleteUser'])->middleware('manage-user','check-membership')->name('deleteUser');

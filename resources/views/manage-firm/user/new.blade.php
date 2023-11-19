@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="post" action="{{route('createUser')}}">
+                        <form method="post" action="{{route('createUser',[Auth::user()->firm_id])}}">
                             @csrf
                             <div class="form-group row">
                                 <label for="name-input" class="col-4 col-form-label">Name</label>

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RolePermissionSeeder extends Seeder
@@ -13,10 +14,22 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'SuperUser']);
-        Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'User']);
-        Role::create(['name' => 'Viewer']);
-        Role::create(['name' => 'Api']);
+        $superUserRole = Role::create(['name' => 'SuperUser']);
+        $adminRole = Role::create(['name' => 'Admin']);
+        $userRole = Role::create(['name' => 'User']);
+        $viewerRole = Role::create(['name' => 'Viewer']);
+        $apiRole = Role::create(['name' => 'Api']);
+
+        Permission::create(['name' => 'manage firm']);
+        Permission::create(['name' => 'manage users']);
+        Permission::create(['name' => 'manage recipient']);
+        Permission::create(['name' => 'view recipient']);
+        Permission::create(['name' => 'connect api']);
+
+        $superUserRole->givePermissionTo('manage firm','manage users','manage recipient','view recipient','connect api');
+        $adminRole->givePermissionTo('manage users','manage recipient','view recipient');
+        $userRole->givePermissionTo('manage recipient','view recipient');
+        $viewerRole->givePermissionTo('view recipient');
+        $apiRole->givePermissionTo('connect api');
     }
 }
