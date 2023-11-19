@@ -10,9 +10,13 @@ class RecipientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($firmId,$recipientId)
     {
-        //
+        $recipient = Recipient::where('firm_id','=',$firmId)->find($recipientId);
+        if (is_null($recipient)){
+            return redirect()->back()->with(['error' => 'Recipient Not Found.']);
+        }
+        return view('manage-firm/recipient.detail',compact('recipient'));
     }
 
     /**

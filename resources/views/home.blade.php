@@ -8,7 +8,7 @@
                 <div class="card-header">
                     {{ __('Dashboard') }}
                     @if($user->hasRole('Admin'))
-                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('adminPage',[$user->firm_id]) }}'" style="float: right">Manage Firm</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('adminPage',[$user->firm_id]) }}'" style="float: right;margin-left: 10px">Manage Firm</button>
                         <button type="button" class="btn btn-primary" onclick="location.href='{{ route('profileDetailPage',[$user->firm_id,$user->id]) }}'" style="float: right">Profile</button>
                     @else
                         <button type="button" class="btn btn-primary" onclick="location.href='{{ route('profileDetailPage',[$user->firm_id,$user->id]) }}'" style="float: right">Profile</button>

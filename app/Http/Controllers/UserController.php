@@ -19,7 +19,7 @@ class UserController extends Controller
         if (is_null($user)){
             return redirect()->back()->with(['error' => 'User Not Found.']);
         }
-        $roles = Role::all();
+        $roles = Role::query()->where('name','!=','SuperUser')->get();
         return view('manage-firm/user.detail',compact('user','roles'));
     }
 

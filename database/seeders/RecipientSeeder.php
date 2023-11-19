@@ -17,7 +17,7 @@ class RecipientSeeder extends Seeder
             for ($e = 1; $e <= 50; $e++) {
                 DB::table('recipients')->insert(
                     [
-                        'recipient_type' => 'email',
+                        'recipient_type' => 'Email',
                         'recipient' => fake()->unique()->safeEmail(),
                         'allow_status' => rand(0,1),
                         'consent_date' => fake()->dateTime(),
@@ -26,7 +26,7 @@ class RecipientSeeder extends Seeder
                 );
                 DB::table('recipients')->insert(
                     [
-                        'recipient_type' => 'sms',
+                        'recipient_type' => 'Sms',
                         'recipient' => fake()->unique()->phoneNumber(),
                         'allow_status' => rand(0,1),
                         'consent_date' => fake()->dateTime(),
