@@ -30,12 +30,13 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['check-membership'])->group(function () {
 
+    Route::get('/{firm_id}/profile/detail/{user_id}',[UserController::class,'profilePage'])->name('profileDetailPage');
+
     Route::middleware(['manage-user'])->group(function (){
 
         Route::get('/{firm_id}/manage-firm/admin',[FirmController::class, 'adminPage'])->name('adminPage');
         Route::get('/{firm_id}/user/create',[UserController::class, 'createUserPage'])->name('createUserPage');
         Route::get('/{firm_id}/user/detail/{user_id}',[UserController::class,'detailPage'])->name('userDetailPage');
-        Route::get('/{firm_id}/profile/detail/{user_id}',[UserController::class,'profilePage'])->name('profileDetailPage');
 
         Route::post('/{firm_id}/user/update',[UserController::class,'updateUser'])->name('updateUser');
         Route::post('/{firm_id}/user/create',[UserController::class,'createUser'])->name('createUser');
