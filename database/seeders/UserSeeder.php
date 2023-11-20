@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan',
             'email' => 'superuser@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 0
+            'firm_id' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['SuperUser']);
@@ -29,7 +32,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm 1 admin',
             'email' => 'firm1admin@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 1
+            'firm_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['Admin']);
@@ -38,7 +43,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm1 user',
             'email' => 'firm1user@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 1
+            'firm_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['User']);
@@ -47,7 +54,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm1 viewer',
             'email' => 'firm1viewer@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 1
+            'firm_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['Viewer']);
@@ -56,7 +65,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm1 api',
             'email' => 'firm1api@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 1
+            'firm_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['Api']);
@@ -65,7 +76,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm 2 admin',
             'email' => 'firm2admin@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 2
+            'firm_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['Admin']);
@@ -74,7 +87,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm2 user',
             'email' => 'firm2user@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 2
+            'firm_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['User']);
@@ -83,7 +98,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm2 viewer',
             'email' => 'firm2viewer@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 2
+            'firm_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['Viewer']);
@@ -92,7 +109,9 @@ class UserSeeder extends Seeder
             'name' => 'Hasan firm2 api',
             'email' => 'firm2api@gmail.com',
             'password' => Hash::make('password'),
-            'firm_id' => 2
+            'firm_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         $user->assignRole(['Api']);
@@ -102,28 +121,36 @@ class UserSeeder extends Seeder
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => Hash::make('password'),
-                'firm_id' => $i
+                'firm_id' => $i,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
             $user->assignRole(['Admin']);
             $user = User::create([
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => Hash::make('password'),
-                'firm_id' => $i
+                'firm_id' => $i,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
             $user->assignRole(['User']);
             $user = User::create([
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => Hash::make('password'),
-                'firm_id' => $i
+                'firm_id' => $i,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
             $user->assignRole(['Viewer']);
             $user = User::create([
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => Hash::make('password'),
-                'firm_id' => $i
+                'firm_id' => $i,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
             $user->assignRole(['Api']);
         }

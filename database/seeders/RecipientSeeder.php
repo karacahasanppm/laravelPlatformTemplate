@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,9 @@ class RecipientSeeder extends Seeder
                         'recipient' => fake()->unique()->safeEmail(),
                         'allow_status' => rand(0,1),
                         'consent_date' => fake()->dateTime(),
-                        'firm_id' => $i
+                        'firm_id' => $i,
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
                     ]
                 );
                 DB::table('recipients')->insert(
@@ -30,7 +33,9 @@ class RecipientSeeder extends Seeder
                         'recipient' => fake()->unique()->phoneNumber(),
                         'allow_status' => rand(0,1),
                         'consent_date' => fake()->dateTime(),
-                        'firm_id' => $i
+                        'firm_id' => $i,
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
                     ]
                 );
             }

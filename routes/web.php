@@ -45,11 +45,15 @@ Route::middleware(['check-membership'])->group(function () {
 
     Route::middleware(['manage-recipient'])->group(function (){
 
-        Route::get('/{firm_id}/recipient/detail/{recipient_id}',[RecipientController::class,'index'])->name('recipientDetailPage');
-        Route::post('/{firm_id}/recipient/update',[RecipientController::class,'updateRecipient'])->name('updateRecipient');
-        Route::post('/{firm_id}/recipient/create',[RecipientController::class,'createRecipient'])->name('createRecipient');
-        Route::get('/{firm_id}/recipient/delete/{recipient_id}',[RecipientController::class,'deleteRecipient'])->name('deleteRecipient');
+        Route::get('/{firm_id}/recipient/create',[RecipientController::class, 'createRecipientPage'])->name('createRecipientPage');
+        Route::post('/{firm_id}/recipient/update',[RecipientController::class,'update'])->name('updateRecipient');
+        Route::post('/{firm_id}/recipient/create',[RecipientController::class,'create'])->name('createRecipient');
+        Route::get('/{firm_id}/recipient/delete/{recipient_id}',[RecipientController::class,'delete'])->name('deleteRecipient');
 
+    });
+
+    Route::middleware(['view-recipient'])->group(function (){
+        Route::get('/{firm_id}/recipient/detail/{recipient_id}',[RecipientController::class,'index'])->name('recipientDetailPage');
     });
 
 });

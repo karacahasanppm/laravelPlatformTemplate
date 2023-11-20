@@ -18902,6 +18902,11 @@
             public mixed $password;
             public mixed $password_old;
             public mixed $firm_id;
+            public mixed $type_select;
+            public mixed $recipient_id;
+            public mixed $status_select;
+            public mixed $consent_date_input;
+            public mixed $recipient_input;
 
             /**
          *

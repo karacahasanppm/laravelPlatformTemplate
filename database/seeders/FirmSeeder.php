@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,9 @@ class FirmSeeder extends Seeder
         for ($i = 1; $i <= 50; $i++) {
             DB::table('firms')->insert(
                 [
-                    'name' => fake()->streetName()
+                    'name' => fake()->streetName(),
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ]
             );
         }

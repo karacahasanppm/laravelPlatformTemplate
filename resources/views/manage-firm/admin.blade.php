@@ -18,6 +18,11 @@
                                 <button class="nav-link" id="recipients-tab" data-bs-toggle="tab" data-bs-target="#recipients" type="button" role="tab" aria-controls="recipients" aria-selected="false">Recipient</button>
                             </li>
                         </ul>
+                        @if (session('success'))
+                            <div class="alert alert-success mt-3">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
                                 <table class="table">
@@ -45,11 +50,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                @if (session('success'))
-                                    <div class="alert alert-success">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
                             </div>
                             <div class="tab-pane fade" id="recipients" role="tabpanel" aria-labelledby="recipients-tab">
                                 <form action="{{ route('adminPage',[Auth::user()->firm_id]) }}" method="get" style="margin-top: 10px">
@@ -71,6 +71,11 @@
                                         <th scope="col">Operate</th>
                                     </thead>
                                     <tbody>
+                                    @if(Auth::user()->hasPermissionTo('manage recipient'))
+                                        <tr>
+                                            <td colspan="5"><a target="_blank" href="{{route('createRecipientPage',[Auth::user()->firm_id])}}" type="button" class="btn btn-primary" style="width: 100%">Add User</a></td>
+                                        </tr>
+                                    @endif
                                     @foreach($recipients as $recipient)
                                         <tr>
                                             <td>{{$recipient->recipient_type}}</td>
