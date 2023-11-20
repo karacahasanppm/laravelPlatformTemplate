@@ -4,9 +4,9 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckFirmOwnership;
 use App\Http\Middleware\ManageFirm;
-use App\Http\Middleware\manageRecipient;
+use App\Http\Middleware\ManageRecipient;
 use App\Http\Middleware\ManageUser;
-use App\Http\Middleware\viewRecipient;
+use App\Http\Middleware\ViewRecipient;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
