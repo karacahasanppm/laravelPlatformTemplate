@@ -28,6 +28,13 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::middleware(['manage-firm'])->group(function (){
+
+    Route::get('/super-dashboard',[UserController::class,'superuserDashboard'])->name('superuserDashboard');
+    Route::get('/superuserAssignFirm/{firm_id}/{user_id}',[UserController::class,'superuserAssignFirm'])->name('superuserAssignFirm');
+
+});
+
 Route::middleware(['check-membership'])->group(function () {
 
     Route::get('/{firm_id}/profile/detail/{user_id}',[UserController::class,'profilePage'])->name('profileDetailPage');

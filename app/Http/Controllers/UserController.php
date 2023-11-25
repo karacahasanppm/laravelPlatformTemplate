@@ -14,6 +14,34 @@ use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
+
+    public function superuserAssignFirm($firmId,$id){
+        $firm = Firm::findOrFail($firmId);
+        $user = User::findOrFail($id);
+        $user->firm_id = $firm->id;
+        $user->save();
+        return redirect()->route('home');
+    }
+    public function superuserDashboard(Request $request){
+
+        if (isset($request->q)){
+
+            $firms = Firm::query()
+                ->where(function ($query) use ($request){
+                    $query->where('id','LIKE',"%{$request->q}%");
+                    $query->orWhere('name','LIKE',"%{$request->q}%");
+                })->paginate(15);
+
+        }else{
+
+            $firms = Firm::query()->orderBy('id')->paginate(15);
+
+        }
+
+        $user = User::find(Auth::id());
+        return view('super-dashboard',compact('firms','user'));
+
+    }
     public function detailPage ($firmId,$userId){
         $user = User::where('firm_id','=',$firmId)->find($userId);
         if (is_null($user)){

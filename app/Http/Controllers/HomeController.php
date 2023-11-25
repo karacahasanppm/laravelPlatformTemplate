@@ -26,15 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->hasRole('SuperUser')){
-            $user = User::with(['firm'])->find(Auth::id());
-            $recipients = Firm::find($user->firm->id)->recipients()->paginate(15);
-            return view('home',compact('user','recipients'));
-        }else{
-            $firms = Firm::all();
-            $user = User::find(Auth::id());
-            return view('home',compact('firms','user'));
-        }
+
+        $user = User::with(['firm'])->find(Auth::id());
+        $recipients = Firm::find($user->firm->id)->recipients()->paginate(15);
+        return view('home',compact('user','recipients'));
+
     }
 
 
