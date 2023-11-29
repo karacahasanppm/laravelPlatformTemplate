@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function (){
         Route::view('/create/firm','manage-platform.create-firm')->name('createFirmPage');
         Route::view('/create/super-user','manage-platform.create-super-user')->name('createSuperUserPage');
 
+        Route::post('/create/firm',[FirmController::class,'createFirm'])->name('createFirm');
+
     });
 
     Route::middleware(['check-membership'])->group(function () {

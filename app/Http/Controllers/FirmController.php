@@ -6,10 +6,24 @@ use App\Models\Firm;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 class FirmController extends Controller
 {
+    public function createFirm(Request $request){
 
+        $request->validate([
+            'name_input' => 'required|string|unique:firms,name|min:3|max:30'
+        ]);
+
+        $firm = new Firm();
+        $firm->name = $request->name_input;
+        $firm->save();
+
+        return Redirect::back()->with(['success' => 'Successfully saved']);
+
+    }
     public function adminPage(Request $request){
 
         $users = User::query()
