@@ -30,10 +30,12 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function (){
 
-    Route::middleware(['manage-firm'])->group(function (){
+    Route::middleware(['manage-platform'])->group(function (){
 
         Route::get('/super-dashboard',[UserController::class,'superuserDashboard'])->name('superuserDashboard');
         Route::get('/superuserAssignFirm/{firm_id}/{user_id}',[UserController::class,'superuserAssignFirm'])->name('superuserAssignFirm');
+        Route::view('/create/firm','manage-platform.create-firm')->name('createFirmPage');
+        Route::view('/create/super-user','manage-platform.create-super-user')->name('createSuperUserPage');
 
     });
 
@@ -41,9 +43,8 @@ Route::middleware('auth')->group(function (){
 
         Route::get('/{firm_id}/profile/detail/{user_id}',[UserController::class,'profilePage'])->name('profileDetailPage');
 
-        Route::middleware(['manage-user'])->group(function (){
+        Route::middleware(['manage-firm'])->group(function (){
 
-            Route::get('/{firm_id}/manage-firm/admin',[FirmController::class, 'adminPage'])->name('adminPage');
             Route::get('/{firm_id}/user/create',[UserController::class, 'createUserPage'])->name('createUserPage');
             Route::get('/{firm_id}/user/detail/{user_id}',[UserController::class,'detailPage'])->name('userDetailPage');
 
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function (){
         });
 
         Route::middleware(['view-recipient'])->group(function (){
+            Route::get('/{firm_id}/manage-firm/admin',[FirmController::class, 'adminPage'])->name('adminPage');
             Route::get('/{firm_id}/recipient/detail/{recipient_id}',[RecipientController::class,'index'])->name('recipientDetailPage');
         });
 

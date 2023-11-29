@@ -4,8 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckFirmOwnership;
 use App\Http\Middleware\ManageFirm;
+use App\Http\Middleware\ManagePlatform;
 use App\Http\Middleware\ManageRecipient;
-use App\Http\Middleware\ManageUser;
 use App\Http\Middleware\ViewRecipient;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -59,9 +59,9 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'manage-user' => ManageUser::class,
-        'manage-recipient' => ManageRecipient::class,
         'manage-firm' => ManageFirm::class,
+        'manage-recipient' => ManageRecipient::class,
+        'manage-platform' => ManagePlatform::class,
         'view-recipient' => ViewRecipient::class,
         'check-membership' => CheckFirmOwnership::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

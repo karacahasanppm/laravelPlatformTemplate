@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FirmController extends Controller
 {
+
     public function adminPage(Request $request){
 
         $users = User::query()

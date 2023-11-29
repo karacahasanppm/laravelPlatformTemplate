@@ -7,6 +7,8 @@
                 <div class="card">
                     <div class="card-header">
                         {{ __('SuperUser Dashboard') }}
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('createSuperUserPage') }}'" style="float: right;margin-left: 10px">Create Super User</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('createFirmPage') }}'" style="float: right;margin-left: 10px">Create Firm</button>
                     </div>
 
                     <div class="card-body">

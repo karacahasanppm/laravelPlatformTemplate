@@ -20,14 +20,14 @@ class RolePermissionSeeder extends Seeder
         $viewerRole = Role::create(['name' => 'Viewer']);
         $apiRole = Role::create(['name' => 'Api']);
 
+        Permission::create(['name' => 'manage platform']);
         Permission::create(['name' => 'manage firm']);
-        Permission::create(['name' => 'manage users']);
         Permission::create(['name' => 'manage recipient']);
         Permission::create(['name' => 'view recipient']);
         Permission::create(['name' => 'connect api']);
 
-        $superUserRole->givePermissionTo('manage firm','manage users','manage recipient','view recipient','connect api');
-        $adminRole->givePermissionTo('manage users','manage recipient','view recipient');
+        $superUserRole->givePermissionTo('manage platform','manage firm','manage recipient','view recipient','connect api');
+        $adminRole->givePermissionTo('manage firm','manage recipient','view recipient');
         $userRole->givePermissionTo('manage recipient','view recipient');
         $viewerRole->givePermissionTo('view recipient');
         $apiRole->givePermissionTo('connect api');

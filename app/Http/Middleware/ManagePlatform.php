@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class ManageUser
+class ManagePlatform
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class ManageUser
         if (!Auth::check()){
             return redirect()->route('login');
         }else{
-            if(!Auth::user()->hasPermissionTo('manage users')){
+            if(!Auth::user()->hasPermissionTo('manage platform')){
                 abort(403,'You are not authorized to view this page.');
             }
         }
