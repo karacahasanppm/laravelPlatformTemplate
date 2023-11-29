@@ -18,7 +18,7 @@ class CheckFirmOwnership
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (!Auth::user()->hasRole('SuperUser') || Auth::user()->firm_id == "0"){
+        if (!Auth::user()->hasRole('SuperUser') || Auth::user()->firm_id == 0){
             if (Auth::user()->firm_id != $request->firm_id){
                 abort(403,'You are not authorized to view this page.');
             }

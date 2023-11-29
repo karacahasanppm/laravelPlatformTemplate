@@ -39,6 +39,9 @@ class UserController extends Controller
         }
 
         $user = User::find(Auth::id());
+        $user->firm_id = 0;
+        $user->save();
+        Auth::user()->refresh();
         return view('super-dashboard',compact('firms','user'));
 
     }
