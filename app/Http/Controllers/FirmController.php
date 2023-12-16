@@ -11,6 +11,38 @@ use Illuminate\Validation\Rule;
 
 class FirmController extends Controller
 {
+    public function deleteFirm($id){
+
+        $firm = Firm::findOrFail($id);
+
+        $firm->recipients()->delete();
+        $firm->users()->delete();
+
+        $firm->deleteOrFail();
+
+        return Redirect::route('superuserDashboard')->with(['success' => 'Successfully deleted']);
+
+    }
+    public function updateFirm(Request $request){
+
+        $request->validate([
+            'firm_id' => 'required',
+            'name_input' => 'required|string'
+        ]);
+
+        $firm = Firm::find($request->firm_id);
+        $firm->name = $request->name_input;
+        $firm->save();
+
+        return Redirect::back()->with(['success' => 'Successfully saved']);
+    }
+    public function manageFirmSuperUserPage($id){
+
+        $firm = Firm::findOrFail($id);
+
+        return view('manage-platform.manage-firm',(compact('firm')));
+
+    }
     public function createFirm(Request $request){
 
         $request->validate([

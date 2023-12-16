@@ -15,8 +15,14 @@
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
+                                {{ session('success') }}
                             </div>
                         @endif
+                            @if (session('success'))
+                                <div class="alert alert-success" role="success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                         {{ __('Select the company to manage') }} <br>
                             <form action="{{ route('superuserDashboard',[Auth::user()->id]) }}" method="get" style="margin-top: 10px">
                                 <div class="row">
@@ -32,16 +38,16 @@
                                 <thead>
                                 <th scope="col">Id</th>
                                 <th scope="col">Firm</th>
-                                <th scope="col">Operate</th>
+                                <th style="width: 15%" scope="col">Choose</th>
+                                <th style="width: 15%" scope="col">Options</th>
                                 </thead>
                                 <tbody>
                                 @foreach($firms as $firm)
                                     <tr>
                                         <td>{{$firm->id}}</td>
                                         <td>{{$firm->name}}</td>
-                                        <td>
-                                            <a target="_blank" href='{{ route('superuserAssignFirm',[$firm->id,Auth::user()->id]) }}' type="button" class="btn btn-primary">Manage</a>
-                                        </td>
+                                        <td><a target="_blank" href='{{ route('superuserAssignFirm',[$firm->id,Auth::user()->id]) }}' type="button" class="btn btn-primary">Choose</a></td>
+                                        <td><a target="_blank" href='{{ route('manageFirmSuperUserPage',[$firm->id]) }}' type="button" class="btn btn-warning">Options</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

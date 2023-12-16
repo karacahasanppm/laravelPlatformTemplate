@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function (){
         Route::view('/create/super-user','manage-platform.create-super-user')->name('createSuperUserPage');
 
         Route::post('/create/firm',[FirmController::class,'createFirm'])->name('createFirm');
+        Route::get('/manage/firm/{firm_id}',[FirmController::class,'manageFirmSuperUserPage'])->name('manageFirmSuperUserPage');
+        Route::post('/update/firm',[FirmController::class,'updateFirm'])->name('updateFirm');
+        Route::get('/delete/firm/{firm_id}',[FirmController::class,'deleteFirm'])->name('deleteFirm');
 
     });
 
